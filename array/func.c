@@ -24,3 +24,5 @@ void print_light_on()
             printf("%d\n",light_on[i]+i);
         }    
 }
+
+//:D
