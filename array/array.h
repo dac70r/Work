@@ -8,9 +8,9 @@
 #define INDEX_INITIAL                              0
 
 //Front/Back Light status
-#define LIGHT_STATUS_ON                            0x00
-#define LIGHT_STATUS_OFF                           0x01
-#define LIGHT_STATUS_INITIAL                       0x01
+#define LIGHT_STATUS_OFF                           0x00
+#define LIGHT_STATUS_ON                            0x01
+#define LIGHT_STATUS_INITIAL                       0x00
 
 //Light operation mode
 #define LIGHT_MODE_AUTO                            0x00
@@ -22,4 +22,4 @@
 void light_on_Init(void);
 void printing(void);
 void print_light_on();
-void light_status_indicator(uint8_t light_mode);
+void light_status_indicator(uint8_t, uint16_t);

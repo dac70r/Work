@@ -2,6 +2,8 @@
 
 static uint8_t light_on[NUMBER_OF_SAMPLES] = {}; 
 static uint8_t light_on_initial[NUMBER_OF_SAMPLES] = {}; 
+uint8_t Sum_Light_On = 0;
+uint8_t lux_instant = 0; 
 
 void printing (void)
 {
@@ -36,19 +38,20 @@ void print_light_on()
         }     
 }
 
-void light_status_indicator(uint8_t light_mode)
+void light_status_indicator(uint8_t light_mode, uint16_t lux_instant)
 {
     switch(light_mode)
     {
-        case 'LIGHT_MODE_AUTO':
-            printf("Now in auto mode");
+        case LIGHT_MODE_AUTO:
+            printf("Now in auto mode\n");
+            printf("Lux now is %d",lux_instant);
         break;
 
-        case 'LIGHT_MODE_ON':
+        case LIGHT_MODE_ON:
             printf("Now in on mode");
         break;
 
-        case 'LIGHT_MODE_OFF':
+        case LIGHT_MODE_OFF:
             printf("Now in off mode");
         break;
 
@@ -57,6 +60,8 @@ void light_status_indicator(uint8_t light_mode)
     }
     
 }
+
+//void lux 
 
 
 
