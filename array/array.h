@@ -14,6 +14,7 @@ extern "C"
 #define LUX_THRESHOLD                              400
 #define NUMBER_OF_SAMPLES                          5
 #define INDEX_INITIAL                              0
+#define SAMPLING_TIME                              0.5
 
 //Front/Back Light status
 #define LIGHT_STATUS_OFF                           0x00

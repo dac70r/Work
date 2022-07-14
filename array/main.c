@@ -78,7 +78,7 @@ int main()
     light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_on);
-
+    
 
 
 
