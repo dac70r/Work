@@ -6,6 +6,10 @@
 *.ko
 *.obj
 *.elf
+main.o
+func.o
+array.c
+a.exe
 
 # Linker output
 *.ilk
