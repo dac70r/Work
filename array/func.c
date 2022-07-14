@@ -98,28 +98,34 @@ void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
             /* Part 3: */
             if (light_status != activate_light){light_status = activate_light;}
             if (index_number >= NUMBER_OF_SAMPLES){index_number = INDEX_INITIAL;}
+            printf("Carry over....................\n");
             printf("light_status: %d, activate_light: %d, index_number: %d\n", light_status, activate_light, index_number);
             
         break;
 
         case LIGHT_MODE_ON:
-            printf("Now in on mode\n");
+            printf("-------------------------------------------------------Now in on mode\n");
+            printf("Before............light status = %d\n",light_status);
             if(light_status == LIGHT_STATUS_OFF) {light_status = LIGHT_STATUS_ON;}
             for (int i = 0; i<NUMBER_OF_SAMPLES; i++)
                 {
                     light_on_initial[i] = 0;            //Light_on_initial = {1, 1, 1, 1, 1, 1....1, 1}
                     light_on[i] = light_on_initial[i];  
                 }
+            printf("After............light status = %d\n",light_status);
+
         break;
 
         case LIGHT_MODE_OFF:
-            printf("Now in off mode\n");
+            printf("-------------------------------------------------------Now in off mode\n");
+            printf("Before............light status = %d\n",light_status);
             if(light_status == LIGHT_STATUS_ON) {light_status = LIGHT_STATUS_OFF;}
             for (int i = 0; i<NUMBER_OF_SAMPLES; i++)
                 {
                     light_on_initial[i] = 1;            //Light_on_initial = {1, 1, 1, 1, 1, 1....1, 1}
                     light_on[i] = light_on_initial[i];  
                 }
+            printf("After............light status = %d\n",light_status);
         break;
 
         default: 

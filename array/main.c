@@ -41,15 +41,47 @@ int main()
     /* Init the arrays*/
     light_on_Init();
     
-    /* */
+    /* Case 1: auto mode in bright and dark environments bright -> dark -> bright -> bright
+    light_status_indicator(light_mode,lux_array_off);
+    light_status_indicator(light_mode,lux_array_on);
+    light_status_indicator(light_mode,lux_array_on);
+    light_status_indicator(light_mode,lux_array_on);*/
+
+    /* Case 2: auto -> on -> off -> on -> auto -> off -> on -> off -> auto modes in bright environment
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_off);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_off);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_off);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_off);
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_off);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_off);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_off);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_off);
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_off);*/
+
+    /* Case 3: auto -> on -> off -> on -> auto -> off -> on -> off -> auto modes in dark environment
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_on);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_on);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_on);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_on);
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_on);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_on);
+    light_status_indicator(LIGHT_MODE_ON,lux_array_on);
+    light_status_indicator(LIGHT_MODE_OFF,lux_array_on);
+    light_status_indicator(LIGHT_MODE_AUTO,lux_array_on);*/
+
+    /* Case 4: auto mode in mixed environment*/
+    light_status_indicator(light_mode,lux_array_off);
+    light_status_indicator(light_mode,lux_array_on);
+    light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_on);
     light_status_indicator(light_mode,lux_array_off);
     light_status_indicator(light_mode,lux_array_same);
+    light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_on);
-    light_status_indicator(light_mode,lux_array_on);
-    light_status_indicator(light_mode,lux_array_off);
-    
-    
+
+
+
+
     
     return 0;
 }
