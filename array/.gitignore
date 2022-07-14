@@ -10,7 +10,6 @@ main.o
 func.o
 array.c
 a.exe
-Makefile
 
 # Linker output
 *.ilk

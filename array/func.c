@@ -1,28 +1,30 @@
 #include "array.h"
 
-static uint8_t light_on[NUMBER_OF_SAMPLES] = {}; 
-static uint8_t light_on_initial[NUMBER_OF_SAMPLES] = {};
-static uint8_t sum_of_light_on[NUMBER_OF_SAMPLES] = {}; 
-uint8_t dummy[NUMBER_OF_SAMPLES] = {1, 0, 1, 0, 0};
+static uint8_t light_on[NUMBER_OF_SAMPLES] = {};            //light_on array
+static uint8_t light_on_initial[NUMBER_OF_SAMPLES] = {};    //light_on array (init values)
+static uint8_t sum_of_light_on[NUMBER_OF_SAMPLES] = {};     //array with N number of ones used for matrix multiplication
+//uint8_t dummy[NUMBER_OF_SAMPLES] = {1, 0, 1, 0, 0};       //dummy array for testing
 //uint8_t* pdummy = &dummy;
-uint8_t Sum_Light_On = 0;
-uint8_t lux_instant = 0; 
+//static uint16_t lux_array[NUMBER_OF_SAMPLES] = {};
+//uint8_t Sum_Light_On = 0;                                 //used to compare with 5 or 0
+//uint8_t lux_instant = 0;                                  //register for lux
+uint8_t index_number = 0;                                   //index 
+uint8_t light_status = LIGHT_STATUS_INITIAL;                //default light status
+
 
 void printing (void)
 {
     printf("Hello World\n"); 
 }
 
-
 void light_on_Init()
 {
     for (int i = 0; i<NUMBER_OF_SAMPLES; i++)
         {
-            light_on_initial[i] = 0;
-            sum_of_light_on[i] = 1;
-            light_on[i] = light_on_initial[i];
+            light_on_initial[i] = 0;            //Light_on_initial = {0, 0, 0, 0, 0, 0....0, 0}
+            light_on[i] = light_on_initial[i];  //Light_on = Light_on_initial
+            sum_of_light_on[i] = 1;             //Array with all 1's {1, 1, 1, 1, 1, 1....1, 1}
         }
-
     //printf("%d"*pdummy);
 }
 
@@ -51,36 +53,83 @@ void print_light_on()
         }          
 }
 
-void light_status_indicator(uint8_t light_mode, uint16_t lux_instant)
+uint8_t light_on_array(uint16_t lux_instant)
 {
+    if(lux_instant <= LUX_THRESHOLD)
+        {
+            printf("Light_on[%d], lux: %d, light_on is 1\n", index_number, lux_instant);
+            light_on[index_number] = 1;
+        }
+    else
+    {
+        printf("Light_on[%d], lux: %d, light_on is 0\n", index_number,lux_instant);
+        light_on[index_number] = 0;
+    }
+
+    index_number++; 
+    return light_on[0];
+}
+
+void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
+{   
+    int activate_light = 0;
+    int Sum_Light_On = 0;
     switch(light_mode)
     {
         case LIGHT_MODE_AUTO:
-            printf("Now in auto mode\n");
-            printf("Lux now is %d",lux_instant);
+            printf("-------------------------------------------------------Now in auto mode\n");
+            /* Part 1: Determine array for light on */
+            for (int x=0; x<NUMBER_OF_SAMPLES; x++)
+            {
+                light_on_array(lux_array[x]);
+                Sum_Light_On = Sum_Light_On + (sum_of_light_on[x] * light_on[x]);
+            }
+            printf("Sum_light_on: %d\n",Sum_Light_On);
+
+            /* Part 2: Determine the light activate flag on/off */
+            printf("Before......................\n");
+            printf("light_status: %d, activate_light: %d, index_number: %d\n", light_status, activate_light, index_number);
+            if (Sum_Light_On == 0){activate_light = ACTIVATE_LIGHT_OFF;}
+            else if (Sum_Light_On == NUMBER_OF_SAMPLES){activate_light = ACTIVATE_LIGHT_ON;}
+            else{activate_light = light_status;}
+            printf("After......................\n");
+            printf("light_status: %d, activate_light: %d, index_number: %d\n", light_status, activate_light, index_number);
+
+            /* Part 3: */
+            if (light_status != activate_light){light_status = activate_light;}
+            if (index_number >= NUMBER_OF_SAMPLES){index_number = INDEX_INITIAL;}
+            printf("light_status: %d, activate_light: %d, index_number: %d\n", light_status, activate_light, index_number);
+            
         break;
 
         case LIGHT_MODE_ON:
-            printf("Now in on mode");
+            printf("Now in on mode\n");
+            if(light_status == LIGHT_STATUS_OFF) {light_status = LIGHT_STATUS_ON;}
+            for (int i = 0; i<NUMBER_OF_SAMPLES; i++)
+                {
+                    light_on_initial[i] = 0;            //Light_on_initial = {1, 1, 1, 1, 1, 1....1, 1}
+                    light_on[i] = light_on_initial[i];  
+                }
         break;
 
         case LIGHT_MODE_OFF:
-            printf("Now in off mode");
+            printf("Now in off mode\n");
+            if(light_status == LIGHT_STATUS_ON) {light_status = LIGHT_STATUS_OFF;}
+            for (int i = 0; i<NUMBER_OF_SAMPLES; i++)
+                {
+                    light_on_initial[i] = 1;            //Light_on_initial = {1, 1, 1, 1, 1, 1....1, 1}
+                    light_on[i] = light_on_initial[i];  
+                }
         break;
 
         default: 
-            printf("Error! Something not right");
+            printf("Error detected!");
     }
+
     
 }
 
-void light_on_array(uint16_t lux_instant)
-{
-    if(lux_instant <= LUX_THRESHOLD)
-    {
-        printf("Light on array index is 1, light is on\n");
-    }
-    else
-        printf("Light on array index is 0, light is off\n");
-}
+
+
+
 
