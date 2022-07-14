@@ -82,7 +82,7 @@ void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
             for (int x=0; x<NUMBER_OF_SAMPLES; x++)
             {
                 light_on_array(lux_array[x]);
-                Sum_Light_On = Sum_Light_On + (sum_of_light_on[x] * light_on[x]);
+                Sum_Light_On = Sum_Light_On + light_on[x];  
             }
             printf("Sum_light_on: %d\n",Sum_Light_On);
 
