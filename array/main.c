@@ -69,7 +69,7 @@ int main()
     light_status_indicator(LIGHT_MODE_OFF,lux_array_on);
     light_status_indicator(LIGHT_MODE_AUTO,lux_array_on);*/
 
-    /* Case 4: auto mode in mixed environment*/
+    /* Case 4: auto mode in mixed environment
     light_status_indicator(light_mode,lux_array_off);
     light_status_indicator(light_mode,lux_array_on);
     light_status_indicator(light_mode,lux_array_same);
@@ -77,7 +77,11 @@ int main()
     light_status_indicator(light_mode,lux_array_off);
     light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_same);
-    light_status_indicator(light_mode,lux_array_on);
+    light_status_indicator(light_mode,lux_array_on);*/
+
+    /* Light_on_array testing */
+    light_on_array(788);
+    light_on_array(7889);
     
 
 

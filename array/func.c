@@ -67,7 +67,7 @@ uint8_t light_on_array(uint16_t lux_instant)
     }
 
     index_number++; 
-    return light_on[0];
+    return light_on[index_number];
 }
 
 void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
