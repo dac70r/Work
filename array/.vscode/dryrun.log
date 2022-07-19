@@ -3,9 +3,8 @@ make.exe: Entering directory 'c:/Users/Dennis/Documents/Code/array'
 gcc -c func.c
 gcc -c main.c
 gcc main.o func.o
+make.exe: Leaving directory 'c:/Users/Dennis/Documents/Code/array'
  
 make.exe: Circular func <- func dependency dropped.
 make.exe: Circular main <- main dependency dropped.
 
-make.exe: Leaving directory 'c:/Users/Dennis/Documents/Code/array'
- 

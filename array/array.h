@@ -34,7 +34,7 @@ extern "C"
 void light_on_Init(void);
 void printing(void);
 void print_light_on();
-void light_status_indicator(uint8_t, uint16_t*);
+uint8_t light_status_indicator(uint8_t, uint16_t*);
 uint8_t light_on_array(uint16_t);
 
 #ifdef __cplusplus

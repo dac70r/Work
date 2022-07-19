@@ -78,7 +78,7 @@ int main()
     light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_same);
     light_status_indicator(light_mode,lux_array_on);
-
+    printf("end\n");
     /* Light_on_array testing 
     light_on_array(788);
     light_on_array(7889);
@@ -90,6 +90,8 @@ int main()
     light_on_array(7889);
     light_on_array(7889); */
 
+    printf("%d",light_status_indicator(light_mode,lux_array_same));
+    printf("%d",light_status_indicator(light_mode,lux_array_on));
 
 
     

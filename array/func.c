@@ -70,7 +70,7 @@ uint8_t light_on_array(uint16_t lux_instant)
     return light_on[index_number];
 }
 
-void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
+uint8_t light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
 {   
     int activate_light = 0;
     int Sum_Light_On = 0;
@@ -100,7 +100,8 @@ void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
             if (index_number >= NUMBER_OF_SAMPLES){index_number = INDEX_INITIAL;}
             printf("Carry over....................\n");
             printf("light_status: %d, activate_light: %d, index_number: %d\n", light_status, activate_light, index_number);
-            
+            return activate_light; 
+
         break;
 
         case LIGHT_MODE_ON:
@@ -113,6 +114,7 @@ void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
                     light_on[i] = light_on_initial[i];  
                 }
             printf("After............light status = %d\n",light_status);
+            return activate_light; 
 
         break;
 
@@ -126,6 +128,7 @@ void light_status_indicator(uint8_t light_mode, uint16_t* lux_array)
                     light_on[i] = light_on_initial[i];  
                 }
             printf("After............light status = %d\n",light_status);
+            return activate_light; 
         break;
 
         default: 
